@@ -1,1 +1,108 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Start here · Niche Radar</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f8f3;color:#203e36;font:15px/1.75 'Segoe UI',Arial,sans-serif}.wrap{max-width:980px;margin:45px auto;padding:0 25px}header{background:#153b32;border-radius:18px;padding:42px;color:#f1f8e9}h1{font-size:43px;letter-spacing:-1.5px;line-height:1.2;margin:12px 0}header p{color:#afc8b3;max-width:620px}.label{font-size:10px;letter-spacing:2px;color:#d6f186}h2{font-size:23px;letter-spacing:-.5px;margin-top:0}section{background:#fff;border:1px solid #dfe7da;border-radius:13px;padding:30px;margin-top:22px}li{margin:10px 0}code{background:#edf3e8;padding:3px 7px;border-radius:5px;color:#42783f}strong{color:#315c43}header strong{color:#e3f2d9}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.grid section{height:100%}img{width:100%;border:1px solid #dfe7da;border-radius:11px;margin-top:22px}.note{background:#edf4e6;border-left:3px solid #81a96b;padding:15px 18px;font-size:13px}.muted{color:#83967e;font-size:13px}table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:12px;border-bottom:1px solid #e6ece0}a{color:#167568}@media(max-width:700px){.grid{display:block}h1{font-size:33px}header,section{padding:25px}}</style></head><body><div class="wrap"><header><div class="label">TPT OPPORTUNITY STUDIO · VERSION 3.0</div><h1>Meet your new<br>research workspace.</h1><p>Import your archive. Find the strongest signals. Keep the ideas worth building.</p></header><section><h2>Install or update</h2><ol><li><strong>Extract the ZIP</strong> to a permanent folder on your computer.</li><li><strong>Updating your old unpacked extension?</strong> Replace the files inside its existing <code>TPT Extension</code> folder with the files in this package. Keep the same folder path. Open <code>chrome://extensions</code> and click its reload button. Your old <code>scrapedData</code> is migrated automatically if available.</li><li><strong>First installation?</strong> Open <code>chrome://extensions</code>, switch on <strong>Developer mode</strong>, select <strong>Load unpacked</strong>, and choose the extracted <code>TPT Extension</code> folder containing <code>manifest.json</code>.</li><li>Pin Niche Radar in your toolbar. Click it, then <strong>Open research workspace</strong>.</li><li>Click <strong>Load your 2 attached CSVs</strong> or drop your own files onto the large import area. Review the preview and click <strong>Import keywords</strong>.</li></ol><p class="note">Your supplied files contain <strong>153 rows → 145 unique keywords</strong>, including eight overlapping rows. The included files have no observation dates, so the dashboard will not invent historical trends. They load only when you choose to import them.</p></section><img src="docs/Preview.png" alt="Niche Radar opportunity dashboard populated with the supplied keyword data"><div class="grid"><section><h2>Find the right opportunities</h2><ul><li><strong>Creator opportunities:</strong> separates likely seller/program names and freebie searches from general product keywords. Choose All search intents to inspect everything.</li><li><strong>Three ranking lenses:</strong> Balanced, Low competition, or Demand first.</li><li><strong>Useful filters:</strong> TPT opportunity, minimum searches, resource upper bound, score, source, dates, and research status.</li><li><strong>Quick views:</strong> low competition, long-tail, growing, and seasonal wording.</li><li><strong>Inspect a keyword:</strong> see the score breakdown, evidence history, source files, research links, and intent override.</li><li><strong>Star, compare, and plan:</strong> save opportunities, select up to five for comparison, and keep notes, tags, and progress.</li></ul></section><section><h2>Make older exports useful</h2><ul><li>Drop multiple CSVs together. UTF-8 CSV and tab/semicolon delimiters are supported.</li><li>Nonstandard headers? Use <strong>Column mapping</strong> in the import preview.</li><li>Exact duplicates merge. Conflicting metrics remain in the evidence history.</li><li>In <strong>Import history</strong>, assign the actual observation date and search window, e.g. “last 30 days.”</li><li>Newest dated evidence wins. Undated uploads cannot silently replace dated snapshots.</li><li>Trends require different observation dates and the same non-empty search window.</li><li>Re-importing identical files is safe. Entire duplicate imports are skipped.</li></ul></section></div><section><h2>Capture a live TPT analytics table</h2><ol><li>Sign in to TPT and open a table with <strong>Keywords, Searches, and Resources</strong> column headers.</li><li>Open the extension popup. Optionally enable <strong>Collect multiple pages</strong>, set the page limit (up to 50), and enter the search window shown by TPT.</li><li>Click <strong>Capture visible analytics</strong>. Keep the TPT tab open. A floating panel shows progress and a stop button. You can close the extension popup.</li><li>Open the research workspace, click <strong>Review captures</strong>, confirm the date/window, and import.</li></ol><p class="muted">Each page is checkpointed. Repeated pages, stalled pagination, malformed rows, and missing headers are handled explicitly. Interrupted captures with saved rows become recoverable after 60 seconds. A capture reads only rendered rows; it cannot bypass sign-in or reveal data the site does not show. Pagination across full page reloads may interrupt collection; import the saved portion and continue from the next page.</p><p class="note">The capture logic was tested against controlled analytics-table fixtures, including multi-page capture and cancellation. It has not been verified in your signed-in TPT account. If TPT changes its table layout, export a CSV and use the importer.</p></section><section><h2>Export and protect your work</h2><table><tr><th>Export</th><th>What you get</th></tr><tr><td>Ranked CSV</td><td>Current filtered view with scores, labels, dates, notes, and source names.</td></tr><tr><td>Selected CSV</td><td>Only checked keywords.</td></tr><tr><td>All observations CSV</td><td>Every unique historical snapshot, including its date and search window.</td></tr><tr><td>Complete workspace JSON</td><td>Imports, saved opportunities, notes, tags, status, intent overrides, and scoring preference.</td></tr></table><p>Click <strong>Back up workspace</strong> regularly. Restore a JSON backup through the same importer. Restore merges imports and research notes; newer timestamped notes win, while the current scoring preference stays unchanged.</p><p class="note">Everything stays in your browser profile. Export a backup before uninstalling, moving the extension folder, switching profiles, or clearing browser data. No external service, subscription, or API key is required.</p></section><section><h2>Understand the score</h2><p>The score prioritizes research; it does not predict sales or prove a niche is profitable. It combines log-scaled demand, resource competition, search-to-resource balance, and the source’s TPT label. Bounded resource ranges use their upper bound; open ranges receive no competition or balance points. Missing resource values stay visible and unscored.</p><p><strong>70+</strong> Priority · <strong>55–69</strong> Worth exploring · <strong>40–54</strong> Selective · <strong>Below 40</strong> Harder entry.</p><p>Open <strong>Scoring & help</strong> for the formula and assumptions. Verify competing products, prices, reviews, formats, and buyer intent before building. The tool does not scrape review counts, badges, images, or sales from product pages.</p></section><p class="muted">Not affiliated with or endorsed by Teachers Pay Teachers. Source files remain editable. Core tests: <code>node --test tests/core.test.cjs</code> from this folder. See <code>docs/VALIDATION.txt</code> for test scope.</p></div></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Niche Radar 4.0</title>
+    <style>
+      @font-face { font-family: "Instrument Sans"; src: url("fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Instrument Sans"; src: url("fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Geist Mono"; src: url("fonts/geist-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      :root { --bg: #fafaf9; --surface: #fff; --line: rgba(28, 25, 23, 0.08); --text: #1c1917; --text-2: #57534e; --text-3: #78716c; --accent: #1a7964; --cell: #e7e5e4; }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg: #141415; --surface: #19191b; --line: rgba(237, 237, 237, 0.08); --text: #ededed; --text-2: #a1a1a6; --text-3: #85858b; --accent: #4cbf98; --cell: #2a2a2d; }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--text); font: 400 15px/24px "Instrument Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+      .wrap { max-width: 880px; margin: 0 auto; padding: 64px 24px 96px; }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+      .brand svg { width: 18px; height: 18px; color: var(--accent); }
+      h1 { font-size: 40px; line-height: 44px; font-weight: 500; letter-spacing: -0.02em; margin: 40px 0 16px; }
+      .lede { font-size: 18px; line-height: 28px; color: var(--text-2); max-width: 36rem; margin: 0; }
+      .strip { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; max-width: 360px; margin: 32px 0 0; }
+      .strip i { height: 20px; border-radius: 4px; background: var(--cell); }
+      .strip i.on { background: var(--accent); }
+      section { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
+      h2 { font-size: 20px; line-height: 28px; font-weight: 500; margin: 0 0 16px; }
+      ol, ul { margin: 0; padding-left: 20px; display: grid; gap: 10px; color: var(--text-2); }
+      li strong { color: var(--text); font-weight: 500; }
+      p { color: var(--text-2); }
+      code, kbd { font: 400 13px/1 "Geist Mono", ui-monospace, monospace; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); padding: 3px 6px; border-radius: 4px; color: var(--text); }
+      .note { padding: 16px 20px; border-radius: 12px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); margin-top: 20px; }
+      .note strong { font-weight: 500; color: var(--text); }
+      figure { margin: 24px 0 0; }
+      img { display: block; width: 100%; border-radius: 12px; box-shadow: 0 0 0 1px var(--line), 0 8px 24px rgba(0, 0, 0, 0.06); }
+      figcaption { margin-top: 8px; font-size: 13px; color: var(--text-3); }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 32px; line-height: 36px; } }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="brand"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5" /><circle cx="8" cy="8" r="2.25" fill="currentColor" /></svg>Niche Radar 4.0</div>
+      <h1>What to make next for TPT, and when to publish it</h1>
+      <p class="lede">Every keyword you look up in TPT’s Site Search Analytics is saved with its monthly searches, peak month and weekly curve. The season planner shows which demand peaks next and what to build for it.</p>
+      <div class="strip" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <section>
+        <h2>Update an existing install, your research stays</h2>
+        <ol>
+          <li><strong>Optional safety copy.</strong> Open your current Niche Radar workspace and click Back up workspace.</li>
+          <li><strong>Extract this zip into the same folder</strong> you loaded in Chrome before, the one with <code>manifest.json</code>, and let it replace the files. Keep the folder where it is. Chrome ties the stored research to that folder.</li>
+          <li>Open <code>chrome://extensions</code> and click the reload arrow on the Niche Radar card. Version 4 also runs on teacherspayteachers.com pages, so Chrome may list that site under its access.</li>
+          <li>Reload any TPT tab that was already open.</li>
+        </ol>
+        <p class="note"><strong>Nothing is deleted or converted.</strong> Version 4 reads the same browser storage as version 3. On its first save it also keeps an untouched copy of your v3 workspace, which you can download any time from Scoring and help.</p>
+      </section>
+
+      <section>
+        <h2>First install</h2>
+        <ol>
+          <li>Extract the zip to a folder you will keep.</li>
+          <li>Open <code>chrome://extensions</code>, switch on Developer mode and click Load unpacked.</li>
+          <li>Choose the folder that contains <code>manifest.json</code>, then pin Niche Radar in the toolbar.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Collect keywords on TPT</h2>
+        <ol>
+          <li>In your Seller Dashboard, open Site Search Analytics and search a keyword.</li>
+          <li>The Niche Radar panel in the corner saves the keyword on its own: average searches per month, total searches for the last 365 days, resources, TPT’s label, the peak month and its share of the year, and all 53 weeks of the curve.</li>
+          <li>Click <strong>Collect all 100</strong> to save every page of related keywords, each with its own peak season. The panel only reads the page and turns pages. It never runs a search, so the searches TPT allows each day stay untouched.</li>
+        </ol>
+        <figure><img src="docs/tpt-panel.png" alt="The Niche Radar panel on TPT showing new year with 7,960 searches a month and a January peak" /><figcaption>The panel on a keyword lookup</figcaption></figure>
+      </section>
+
+      <section>
+        <h2>What is in the workspace</h2>
+        <ul>
+          <li><strong>Season planner.</strong> Demand by peak month for the next twelve months, the build window one to three months out, and the best keywords to build for it with a publish-by date.</li>
+          <li><strong>Keywords.</strong> Every keyword with its season strip, score, average searches a month, searches, resources, TPT label and change. Filter by peak month, quick views like Peaking soon, or switch to cards or the opportunity map.</li>
+          <li><strong>Keyword detail.</strong> The weekly curve with the peak marked, the publish date, why it scored what it did, a notebook with status, tags and notes, and the keywords TPT buyers search with it.</li>
+          <li><strong>Saved.</strong> A board from Inbox to Published. Drag a card to change its status.</li>
+          <li><strong>Search families.</strong> Keywords TPT reports as searched together with each lookup, plus groups that share a word.</li>
+          <li><strong>Sources.</strong> Every CSV and lookup, with its date and search window. Set a window like “Last 30 days” on old exports and their monthly average appears.</li>
+        </ul>
+        <div class="grid">
+          <figure><img src="docs/season-planner.png" alt="Season planner with demand by peak month" /><figcaption>Season planner</figcaption></figure>
+          <figure><img src="docs/keyword-detail.png" alt="Keyword detail with the weekly curve" /><figcaption>Keyword detail</figcaption></figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>How the numbers are read</h2>
+        <ul>
+          <li>The weekly curve is read from TPT’s chart and checked against TPT’s own figures. For “new year” the 53 weeks add up to the 95,516 searches TPT reports.</li>
+          <li>Average searches a month comes from TPT when it shows it. For related keywords and CSVs it is the total divided by the months in the search window, and it stays empty when the window is unknown.</li>
+          <li>A peak month comes from TPT first, then from the weekly curve. When there is neither, a peak is inferred from words like Halloween or back to school and shown as an outline.</li>
+          <li>Scores rank what to research first. They do not predict sales.</li>
+        </ul>
+      </section>
+
+      <section>
+        <p>Stored in your browser only. No account, no API key, nothing sent anywhere. Not affiliated with Teachers Pay Teachers. Interface type: Instrument Sans and Geist Mono, SIL Open Font License. Icons: lucide, ISC license.</p>
+      </section>
+    </main>
+  </body>
+</html>

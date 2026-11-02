@@ -1,37 +1,133 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Niche Radar · Opportunity Studio</title><link rel="icon" href="icons/icon32.png"><link rel="stylesheet" href="dashboard.css"></head>
-<body>
-<div class="app-shell">
- <aside class="sidebar">
-  <a class="brand" href="dashboard.html"><span class="brand-mark">◉</span><span>niche<span class="brand-light">radar</span><small>TPT OPPORTUNITY STUDIO</small></span></a>
-  <div class="nav-label">WORKSPACE</div>
-  <nav aria-label="Main navigation">
-   <button data-view="explorer" class="nav-item active"><span>◈</span> Opportunity explorer <b id="nav-count">0</b></button>
-   <button data-view="watchlist" class="nav-item"><span>☆</span> Saved opportunities <b id="saved-count">0</b></button>
-   <button data-view="clusters" class="nav-item"><span>▦</span> Keyword clusters</button>
-   <button data-view="history" class="nav-item"><span>◷</span> Import history</button>
-  </nav>
-  <div class="sidebar-note"><span class="live-dot"></span> YOUR RESEARCH, CONNECTED<p>Turn scattered keyword exports into your next product decision.</p><button id="sidebar-import" class="side-import">+ Import keywords</button></div>
-  <nav class="bottom-nav"><button data-view="settings" class="nav-item"><span>⚙</span> Scoring & help</button><button id="backup-btn" class="nav-item"><span>↧</span> Back up workspace</button></nav>
-  <div class="sidebar-footer"><span class="avatar">NR</span><div>Creator workspace<small>Local & private · v3.0</small></div></div>
- </aside>
- <main>
-  <header class="topbar"><div><span class="breadcrumb">WORKSPACE</span><span class="slash">/</span><span id="crumb">Opportunity explorer</span></div><span class="save-state" id="save-state"><i></i> Saved on this device</span></header>
-  <div class="main-content">
-   <section class="page-heading"><div><div class="eyebrow">MAKE YOUR NEXT PRODUCT COUNT</div><h1 id="page-title">Find your next <span>opportunity.</span></h1><p id="page-subtitle">One clear view of demand, competition, and the keywords worth your time.</p></div><div class="header-actions"><button class="button" id="export-btn">↧ Export view</button><button class="button primary" id="import-btn">+ Import CSVs</button></div></section>
-   <div id="capture-inbox"></div>
-   <section id="import-strip" class="import-strip" tabindex="0" role="button" aria-label="Import CSV files. Click or drag and drop one or more files."><span class="upload-icon">↥</span><div><strong>Drop your keyword CSVs here</strong><span>One file or your entire archive. We’ll clean, merge, and rank them.</span></div><span class="import-strip-end">Browse files <span>↗</span></span></section>
-   <section id="stats" class="stats"></section>
-   <section id="view-content"></section>
-   <footer class="workspace-footer">Built for better research. Scores prioritize investigation; they do not predict sales.<span id="data-footnote"></span></footer>
-  </div>
- </main>
-</div>
-<input type="file" id="file-input" accept=".csv,.tsv,.txt,.json" multiple hidden>
-<dialog id="import-dialog" class="modal import-modal"><div class="modal-head"><div><div class="eyebrow">BRING YOUR RESEARCH TOGETHER</div><h2>Import & organize</h2></div><button class="icon-button" data-close="import-dialog" aria-label="Close import">✕</button></div><div class="modal-body"><div class="notice">Older exports have no dates. Set the snapshot date and matching search window to enable honest trend comparisons. File numbers such as “(14)” are never treated as dates.</div><div id="import-preview"></div></div><div class="modal-footer"><span id="import-summary"></span><button class="button" id="add-files">+ Add files</button><button class="button primary" id="commit-import">Import keywords</button></div></dialog>
-<dialog id="detail-dialog" class="modal detail-modal"><div id="detail-content"></div></dialog>
-<dialog id="compare-dialog" class="modal compare-modal"><div class="modal-head"><h2>Compare opportunities</h2><button class="icon-button" data-close="compare-dialog" aria-label="Close comparison">✕</button></div><div class="modal-body" id="compare-content"></div></dialog>
-<dialog id="export-dialog" class="modal compact-modal"><div class="modal-head"><h2>Export your research</h2><button class="icon-button" data-close="export-dialog" aria-label="Close export">✕</button></div><div class="modal-body"><p id="export-count"></p><button class="export-option" data-export="ranked"><strong>Ranked keywords · CSV ↗</strong><span>Current filtered view, scores, metrics, notes, and status.</span></button><button class="export-option" data-export="selected"><strong>Selected keywords · CSV ↗</strong><span>Only the keywords you checked.</span></button><button class="export-option" data-export="history"><strong>All observations · CSV ↗</strong><span>Every unique snapshot with dates and source names.</span></button><button class="export-option" data-export="backup"><strong>Complete workspace · JSON ↗</strong><span>Imports, notes, saved keywords, and preferences. Re-import to restore.</span></button></div></dialog>
-<div id="toast" class="toast" role="status" aria-live="polite"></div><div id="drop-overlay" class="drop-overlay" hidden><div>↧<h2>Drop your research here</h2><p>Multiple CSVs welcome. Your history stays intact.</p></div></div>
-<script src="attached-data.js"></script><script src="core.js"></script><script src="storage.js"></script><script src="dashboard.js"></script>
-</body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Niche Radar</title>
+    <link rel="icon" href="icons/icon32.png" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="theme.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Niche Radar">
+        <a class="brand" href="#planner" data-view="planner">
+          <svg class="brand-mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5" /><circle cx="8" cy="8" r="2.25" fill="currentColor" /></svg>
+          <span>Niche Radar</span>
+        </a>
+        <nav class="nav" aria-label="Views">
+          <button class="nav-row" data-view="planner"><span data-icon="calendar-range"></span><span>Season planner</span></button>
+          <button class="nav-row" data-view="explorer"><span data-icon="rows-3"></span><span>Keywords</span><span class="nav-count" id="count-keywords"></span></button>
+          <button class="nav-row" data-view="watchlist"><span data-icon="star"></span><span>Saved</span><span class="nav-count" id="count-saved"></span></button>
+          <button class="nav-row" data-view="families"><span data-icon="network"></span><span>Search families</span><span class="nav-count" id="count-families"></span></button>
+          <button class="nav-row" data-view="history"><span data-icon="folder-clock"></span><span>Sources</span><span class="nav-count" id="count-sources"></span></button>
+        </nav>
+        <div class="nav-label">Workspace</div>
+        <nav class="nav" aria-label="Workspace">
+          <button class="nav-row" data-view="settings"><span data-icon="sliders-horizontal"></span><span>Scoring and help</span></button>
+          <button class="nav-row" data-action="backup"><span data-icon="download"></span><span>Back up workspace</span></button>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="theme-switch" role="radiogroup" aria-label="Theme">
+            <button role="radio" data-theme-choice="light" aria-label="Light theme"><span data-icon="sun"></span></button>
+            <button role="radio" data-theme-choice="dark" aria-label="Dark theme"><span data-icon="moon"></span></button>
+            <button role="radio" data-theme-choice="system" aria-label="Match system theme"><span data-icon="monitor"></span></button>
+          </div>
+          <p class="foot-note" id="save-state">Stored in this browser</p>
+        </div>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <label class="search">
+            <span data-icon="search"></span>
+            <input id="search-input" type="search" placeholder="Search keywords" aria-label="Search keywords and tags" autocomplete="off" />
+            <kbd>/</kbd>
+          </label>
+          <div class="topbar-actions">
+            <button class="btn" data-action="export" id="export-btn" aria-label="Export"><span data-icon="file-down"></span><span class="btn-label">Export</span></button>
+            <button class="btn primary" data-action="pick" aria-label="Import"><span data-icon="upload"></span><span class="btn-label">Import</span></button>
+          </div>
+        </header>
+        <main class="content" id="content">
+          <div class="page-head">
+            <div>
+              <h1 id="page-title">Season planner</h1>
+              <p id="page-subtitle"></p>
+            </div>
+            <div class="page-actions" id="page-actions"></div>
+          </div>
+          <div id="notices"></div>
+          <div id="view" class="view"></div>
+          <footer class="content-foot" id="content-foot">Scores rank what to research first. They do not predict sales. Not affiliated with Teachers Pay Teachers.</footer>
+        </main>
+      </div>
+    </div>
+
+    <input type="file" id="file-input" accept=".csv,.tsv,.txt,.json" multiple hidden />
+
+    <dialog id="detail" class="sheet" aria-label="Keyword details"><div id="detail-body"></div></dialog>
+
+    <dialog id="import-dialog" class="modal wide" aria-labelledby="import-title">
+      <header class="modal-head">
+        <div>
+          <h2 id="import-title">Import</h2>
+          <p>CSV and TSV exports from TPT, or a Niche Radar backup</p>
+        </div>
+        <button class="icon-btn" data-close="import-dialog" aria-label="Close import"><span data-icon="x"></span></button>
+      </header>
+      <div class="modal-body">
+        <p class="note">Older exports carry no date. Add the date you exported them and the search window they cover, so later imports can show a change. Numbers in file names like “(14)” are never read as dates.</p>
+        <div id="import-preview"></div>
+      </div>
+      <footer class="modal-foot">
+        <span id="import-summary" class="muted"></span>
+        <button class="btn" data-action="pick"><span data-icon="plus"></span>Add files</button>
+        <button class="btn primary" id="commit-import" data-action="commit-import">Import keywords</button>
+      </footer>
+    </dialog>
+
+    <dialog id="compare-dialog" class="modal wide" aria-labelledby="compare-title">
+      <header class="modal-head">
+        <div>
+          <h2 id="compare-title">Compare keywords</h2>
+          <p>Compare searches only when their windows match. Resources are ranges</p>
+        </div>
+        <button class="icon-btn" data-close="compare-dialog" aria-label="Close comparison"><span data-icon="x"></span></button>
+      </header>
+      <div class="modal-body" id="compare-body"></div>
+    </dialog>
+
+    <dialog id="export-dialog" class="modal" aria-labelledby="export-title">
+      <header class="modal-head">
+        <div>
+          <h2 id="export-title">Export</h2>
+          <p id="export-count"></p>
+        </div>
+        <button class="icon-btn" data-close="export-dialog" aria-label="Close export"><span data-icon="x"></span></button>
+      </header>
+      <div class="modal-body option-list">
+        <button class="option" data-export="ranked"><span data-icon="rows-3"></span><span><strong>Keywords in this view</strong><small>CSV with scores, peak month, monthly average, publish date, notes and status</small></span></button>
+        <button class="option" data-export="selected"><span data-icon="check"></span><span><strong>Selected keywords</strong><small>CSV of the keywords you checked</small></span></button>
+        <button class="option" data-export="history"><span data-icon="history"></span><span><strong>Every observation</strong><small>CSV of each snapshot with its date, window and sources</small></span></button>
+        <button class="option" data-export="curves"><span data-icon="trending-up"></span><span><strong>Weekly curves</strong><small>CSV of every captured TPT week, one row per keyword and week</small></span></button>
+        <button class="option" data-export="backup"><span data-icon="database"></span><span><strong>Complete workspace</strong><small>JSON with sources, curves, notes and settings. Import it to restore</small></span></button>
+      </div>
+    </dialog>
+
+    <dialog id="batch-dialog" class="modal" aria-labelledby="batch-title"></dialog>
+
+    <div id="tooltip" class="tooltip" role="tooltip" popover="manual"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite" popover="manual"></div>
+    <div id="drop-overlay" class="drop-overlay" hidden>
+      <div><span data-icon="upload"></span><strong>Drop to import</strong><small>CSV, TSV or a Niche Radar backup. Existing research stays as it is</small></div>
+    </div>
+
+    <script src="icons.js"></script>
+    <script src="attached-data.js"></script>
+    <script src="core.js"></script>
+    <script src="storage.js"></script>
+    <script src="ingest.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

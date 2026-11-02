@@ -1,13 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Niche Radar · TPT Opportunity Studio",
-  "version": "3.0.0",
-  "minimum_chrome_version": "109",
-  "description": "Rank TPT keywords, merge CSV archives, track comparable snapshots, and build your next-product research shortlist.",
+  "version": "4.0.0",
+  "minimum_chrome_version": "114",
+  "description": "Saves the TPT keywords you look up with their peak month, monthly searches and weekly curve, then ranks what to make next and when to publish it.",
   "permissions": ["activeTab", "scripting", "storage", "unlimitedStorage"],
-  "background": {"service_worker": "background.js"},
-  "action": {"default_popup": "popup.html", "default_title": "Niche Radar", "default_icon": {"16":"icons/icon16.png","32":"icons/icon32.png"}},
-  "icons": {"16":"icons/icon16.png","48":"icons/icon48.png","128":"icons/icon128.png"},
+  "host_permissions": ["https://*.teacherspayteachers.com/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://*.teacherspayteachers.com/*"],
+      "js": ["capture-reader.js", "insight-reader.js", "companion.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": { "default_popup": "popup.html", "default_title": "Niche Radar", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" } },
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
   "options_page": "dashboard.html",
-  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'none'"}
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'" }
 }

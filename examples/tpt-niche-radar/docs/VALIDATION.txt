@@ -1,57 +1,44 @@
-Niche Radar v3.0 — validation, 2026-10-08
+Niche Radar v4.0 — validation, 2026-11-02
 
-30 automated data-engine regression tests pass.
-- Actual attached CSV files: 153 rows, 145 unique keywords, eight merged overlaps.
-- Quoted fields, commas, multiline values, BOM, TSV/semicolon parsing.
-- Invalid numeric values, malformed CSV, column mapping, resource ranges.
-- Repeated imports, normalization, provenance, historical precedence and conflicts.
-- No trends without matching reporting windows and distinct dates.
-- Fixed scoring anchors, zero baselines, open competition ranges.
-- JSON validation, CSV formula escaping, prototype-like keyword handling.
-- Seller/program and freebie intent hints, with manual override.
+UNIT TESTS · node --test tests/          47 pass, 0 fail
+- All 30 v3 regression tests pass unchanged (parsing, merging, provenance, dates, trends,
+  scoring anchors, backups, CSV formula escaping, intent hints).
+- v3 compatibility: v3 rows keep their exact v3 signature, so old CSVs are still recognized
+  as repeats. v3 scores are identical in every v3 lens. A v3 workspace without insights opens
+  and ranks the two included CSVs exactly as v3 did (145 keywords, same score total).
+- New metrics: month parsing, search windows, monthly average (reported, derived from a known
+  window, never guessed), seasonal wording hints, months to peak, timing, publish-by date,
+  Peak Season and Avg columns in CSVs, insight cleaning and per-date dedupe, monthly profile
+  from a weekly curve, TPT peak over wording, families from lookups, the timing lens staying
+  in 0 to 100 without changing other lenses, backups keeping every v4 field.
 
-Browser UI checks pass using Chromium 153:
-- Import supplied files, repeated imports and backup merging.
-- Search/filter/sort workflow, saved keywords, notes and status persistence.
-- Side-by-side comparison and CSV/JSON downloads.
-- Editing source dates/windows, keyword clusters, scoring preference persistence.
-- Narrow viewport without page-wide horizontal overflow.
-- Concurrent dashboard writes preserve independent edits.
-- Imported HTML-like text remains inert text.
-- Actual file drag/drop, nonstandard headers, manual mapping and card view.
-- Intent overrides persist and affect creator filtering.
-- Recovery of stale interrupted capture checkpoints.
-- No observed JavaScript runtime errors in these browser scenarios.
+TPT READER TEST · Chromium, a saved Site Search Analytics page for “new year”
+- Avg 7,960 a month, 95,516 total, last 365 days, Nov 2025-2026, 150K-300K resources,
+  Challenging, peak January, 70% share, 66,765 peak searches, 2 searches left.
+- 53 weekly points from 2025-11-02 to 2026-11-01. They add up to exactly 95,516, TPT’s
+  own total, and the week of Jun 21 reads 6 searches, as in TPT’s tooltip. January’s share
+  computed from the curve is 69.5% against TPT’s 70%.
+- Related keywords: 10 rows with Peak Season, seed “new year”, window last 365 days,
+  position 1 to 10 of 100, next page found.
 
-Capture tests use controlled HTML/ARIA fixtures and mocked Chrome messaging/storage:
-- Reordered semantic headers and ARIA grids.
-- Unknown schema refusal.
-- Two-page pagination with disabled final Next button.
-- Repeated script injection guard.
-- Concurrent-start refusal.
-- Stop action retains checkpointed partial results.
+END TO END · the real extension in Chromium, light and dark
+- Import both CSVs, open a TPT page, the panel saves the keyword on its own (11 rows),
+  Collect all walks three related pages and saves 30.
+- Planner, keywords table, cards, map, detail sheet with the curve tooltip, notes autosave,
+  saved board, families, sources, settings, popup. No JavaScript errors. No horizontal
+  overflow at 390 px wide.
 
-Important scope:
-The available test browser runs the dashboard and capture DOM fixtures but does
-not support loading the complete extension runtime. The manifest, service worker,
-popup, and content scripts were syntax/static checked. Actual toolbar permission
-granting and authenticated TPT scraping were not exercised. TPT may change its
-markup. The CSV workflow does not depend on the live TPT layout.
+UPGRADE IN PLACE · v3 installed, research added, then v4 copied over the same folder
+13 of 13 checks pass:
+- Same extension id, so the same browser storage.
+- On first open: every v3 source, note, star, status and the chosen lens identical, same
+  keyword count, every score identical.
+- A TPT lookup afterwards adds keywords and the weekly curve while every v3 source stays.
+- A lookup made with no workspace open, while Chrome still ran the cached v3 worker, is kept
+  in local storage and saved as soon as the workspace opens.
+- An untouched copy of the v3 workspace is stored on the first save.
 
-Source documentation consulted:
-https://developer.chrome.com/docs/extensions/develop/concepts/activeTab
-https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
-
-Starter intent hints were checked against first-party store/program pages:
-https://www.teacherspayteachers.com/store/my-nerdy-teacher
-https://www.teacherspayteachers.com/store/teacher-resource-cabin
-https://www.95percentgroup.com/products/morpheme-magic/
-https://www.teacherspayteachers.com/store/teaching-with-a-mountain-view
-https://www.teacherspayteachers.com/store/what-i-have-learned
-https://www.teacherspayteachers.com/browse/english-language-arts/informational-text?search=Centers
-https://ufli.education.ufl.edu/foundations/
-https://support.mysteryscience.com/hc/en-us/articles/38300066192659-What-is-Mystery-Science
-https://www.teacherspayteachers.com/store/missredacted-6204
-
-The keyword-to-intent mapping is an inference from text, not an exhaustive registry.
-User overrides are available in each keyword's detail panel.
+SCOPE
+TPT pages were tested from a saved copy of the Site Search Analytics view. TPT may change its
+markup. The readers find columns by header text and refuse to guess, and the CSV import does
+not depend on the live page. The panel never clicks a keyword or the search button.
