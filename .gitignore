@@ -8,3 +8,10 @@ examples/*
 !examples/assets/
 examples/assets/*
 !examples/assets/blob.webp
+!examples/tpt-niche-radar/
+# Private research data stays out of the public repo, it ships only in the local zip
+examples/tpt-niche-radar/samples/
+examples/tpt-niche-radar/attached-data.js
+examples/tpt-niche-radar/tests/fixtures/
+examples/tpt-niche-radar/docs/*.png
+examples/tpt-niche-radar/dist/
